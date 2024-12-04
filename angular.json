@@ -28,7 +28,8 @@
               "src/styles.css",
               "node_modules/leaflet/dist/leaflet.css"
             ],
-            "scripts": []
+            "scripts": [],
+            "allowedCommonJsDependencies": ["leaflet"]
           },
           "configurations": {
             "production": {
@@ -40,8 +41,8 @@
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "2kB",
-                  "maximumError": "4kB"
+                  "maximumWarning": "5kB",
+                  "maximumError": "8kB"
                 }
               ],
               "outputHashing": "all"
@@ -83,6 +84,9 @@
             "styles": ["src/styles.css"],
             "scripts": []
           }
+        },
+        "deploy": {
+          "builder": "angular-cli-ghpages:deploy"
         }
       }
     }
