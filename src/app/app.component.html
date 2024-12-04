@@ -1,7 +1,16 @@
 <div class="flex-center">
   <div class="wrapper">
     <div class="background-img">
-      <img class="background" src="pattern-bg-desktop.png" alt="" />
+      <img class="background-desktop" src="pattern-bg-desktop.png" alt="" />
+      <img class="background-mobile" src="pattern-bg-mobile.png" alt="" />
+      @if (geoResponse) {
+      <div class="map-wrapper">
+        <app-map
+          [latitude]="geoResponse.location.lat"
+          [longitude]="geoResponse.location.lng"
+        ></app-map>
+      </div>
+      }
     </div>
     <div class="content">
       <h1>IP Address Tracker</h1>
@@ -10,26 +19,38 @@
           <input
             type="text"
             placeholder="Search for any IP address or domain"
+            [(ngModel)]="ip"
           />
         </div>
-        <button>></button>
+        <button (click)="searchIp()">></button>
       </div>
       <div class="ip-info">
         <div class="info-block">
           <h3>IP ADDRESS</h3>
-          <h2>192.212.174.101</h2>
+          @if (geoResponse) {
+          <h2>{{ geoResponse.ip }}</h2>
+          }
         </div>
         <div class="info-block">
           <h3>LOCATION</h3>
-          <h2>Brooklyn, NY 10001</h2>
+          @if (geoResponse) {
+          <h2>
+            {{ geoResponse.location.country }} +
+            {{ geoResponse.location.region }}
+          </h2>
+          }
         </div>
         <div class="info-block">
           <h3>TIMEZONE</h3>
-          <h2>UTC-05:00</h2>
+          @if (geoResponse) {
+          <h2>UTC{{ geoResponse.location.timezone }}</h2>
+          }
         </div>
         <div class="info-block">
           <h3>ISP</h3>
-          <h2>SpaceX Starlink</h2>
+          @if (geoResponse) {
+          <h2>{{ geoResponse.isp }}</h2>
+          }
         </div>
       </div>
     </div>
